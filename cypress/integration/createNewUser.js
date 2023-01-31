@@ -82,5 +82,32 @@ describe("Test for adding new customer ", () => {
 
       createNewUser.dataVerify("include.text", editFormElement);
     });
+
+    it("should create new user and verify in view user", () => {
+      const selector = [
+        ".dl-horizontal > dd:nth-of-type(1)",
+        ".dl-horizontal > dd:nth-of-type(2)",
+        ".dl-horizontal > dd:nth-of-type(3)",
+        ".dl-horizontal > dd:nth-of-type(4)",
+        ".dl-horizontal > dd:nth-of-type(5)",
+        ".dl-horizontal > dd:nth-of-type(6)",
+      ];
+
+      cy.get(".btn-primary").click();
+
+      createNewUser.dataVerify("include.text", formElement);
+
+      cy.get(".table")
+        .contains("td", name)
+        .get(".btn-outline-info")
+        .last()
+        .click();
+
+      cy.get(selector).each((selector, index) => {
+        cy.get(selector).should("include.text", formElement[index]);
+      });
+
+      cy.get(".btn-link").click();
+    });
   });
 });
