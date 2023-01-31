@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 import { faker } from "@faker-js/faker";
+import Createnewuser from "../../POM/createNewUser_PO";
 
 describe("Test for adding new customer ", () => {
+  const createNewUser = new Createnewuser();
+
   before(function () {
     cy.visitMainPage();
-    cy.get("a.nav-link").last().click();
     cy.login();
   });
 
@@ -19,30 +21,60 @@ describe("Test for adding new customer ", () => {
     const phone = faker.phone.number();
     const email = faker.internet.email();
     const city = faker.address.city();
-    const formElements = [name, company, address, city, phone, email];
+    const formElement = [name, company, address, city, phone, email];
 
     beforeEach(() => {
       cy.get(".btn-primary").click();
-      cy.get("#Name").type(name);
-      cy.get("#Company").type(company);
-      cy.get("#Address").type(address);
-      cy.get("#City").type(city);
-      cy.get("#Phone").type(phone);
-      cy.get("#Email").type(email);
+
+      createNewUser
+        .typeName(name)
+        .typeCompany(company)
+        .typeAddress(address)
+        .typeCity(city)
+        .typePhone(phone)
+        .typeEmail(email);
     });
 
     it("should validate 'BACK TO LIST' button is working and verify data is exist in list", () => {
       cy.get(".btn-link").click();
-      cy.get("tr:last-child>td:not(:last-child)").each((selector, index) => {
-        cy.get(selector).should("not.have.text", formElements[index]);
-      });
+      createNewUser.dataVerify("not.to.contain.text", formElement);
     });
 
     it("should add new user and verify added data is exist in list", () => {
       cy.get(".btn-primary").click();
-      cy.get("tr:last-child>td:not(:last-child)").each((selector, index) => {
-        cy.get(selector).should("include.text", formElements[index]);
-      });
+      createNewUser.dataVerify("contain.text", formElement);
+    });
+
+    it("should add new user and verify added edit data is exist in list", () => {
+      const editName = faker.name.fullName();
+      const editCompany = faker.company.bs();
+      const editAddress = faker.address.buildingNumber();
+      const editPhone = faker.phone.number("984######");
+      const editEmail = faker.internet.email();
+      const editCity = faker.address.city();
+      const editFormElement = [
+        editName,
+        editCompany,
+        editAddress,
+        editCity,
+        editPhone,
+        editEmail,
+      ];
+      cy.get(".btn-primary").click();
+      cy.get(".table")
+        .contains("td", name)
+        .get(".btn-outline-primary")
+        .last()
+        .click();
+      createNewUser
+        .typeName(editName)
+        .typeCompany(editCompany)
+        .typeAddress(editAddress)
+        .typeCity(editCity)
+        .typePhone(editPhone)
+        .typeEmail(editEmail);
+      cy.get(".btn-primary").click();
+      createNewUser.dataVerify("include.text", editFormElement);
     });
   });
 });
