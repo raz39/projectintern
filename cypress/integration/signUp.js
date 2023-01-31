@@ -9,8 +9,8 @@ before(function () {
   cy.get("a.nav-link").eq(4).click();
 });
 
-describe("Signup for itera TRL-1", () => {
-  it("should validate  empty signup error message", () => {
+describe("Signup for itera", () => {
+  it("should validate empty signup error message", () => {
     const selector = [
       "#FirstName-error",
       "#Surname-error",
@@ -24,7 +24,7 @@ describe("Signup for itera TRL-1", () => {
       "Please enter password",
     ];
 
-    signup.clickSignUp();
+    signup.clickOnSignUpButton();
 
     cy.get(selector).each((selector, index) => {
       cy.get(selector).should("include.text", errorMessage[index]);
@@ -32,9 +32,9 @@ describe("Signup for itera TRL-1", () => {
   });
 
   it("should validate password and confirm password are same or not error message", () => {
-    const pass = faker.internet.password();
+    const password = faker.internet.password();
 
-    signup.confirmPassword(pass).clickSignUp();
+    signup.typeconfirmPassword(password).clickOnSignUpButton();
     cy.get("#ConfirmPassword-error").should(
       "have.text",
       "'Confirm password' and 'Password' do not match."
@@ -51,21 +51,21 @@ context("form fill for signup page of ITERA", () => {
 
   beforeEach(() => {
     signup
-      .setFirstName(name)
-      .setSurName(surName)
-      .setEpost()
-      .setMobile(phone)
-      .setUserName(userName)
-      .setPassword(password)
-      .confirmPassword(password)
-      .clickSignUp();
+      .typeFirstName(name)
+      .typeSurName(surName)
+      .typeEpost()
+      .typeMobile(phone)
+      .typeUserName(userName)
+      .typePassword(password)
+      .typeconfirmPassword(password)
+      .clickOnSignUpButton();
   });
 
-  it("should validate  sufficient data signup sucessfull message", () => {
+  it("should validate sufficient data signup sucessfull message", () => {
     signup.verifySuccessMessage();
   });
 
-  it("should validate  already exist username signup error message", () => {
+  it("should validate already exist username signup error message", () => {
     cy.get(".label-danger").should("have.text", "Username already exist");
   });
 });
