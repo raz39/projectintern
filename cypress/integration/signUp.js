@@ -9,7 +9,7 @@ before(function () {
   cy.get("a.nav-link").eq(4).click();
 });
 
-describe("Signup for itera", () => {
+describe("Test for signup page", () => {
   it("should validate empty signup error message", () => {
     const selector = [
       "#FirstName-error",
@@ -42,18 +42,19 @@ describe("Signup for itera", () => {
   });
 });
 
-context("form fill for signup page of ITERA", () => {
+context("Signup formfill dependent test", () => {
   const name = faker.name.firstName();
   const surName = faker.name.lastName();
   const password = faker.internet.password();
   const phone = faker.phone.number("984######");
   const userName = faker.internet.userName();
+  const Epost = faker.internet.email();
 
   beforeEach(() => {
     signup
       .typeFirstName(name)
       .typeSurName(surName)
-      .typeEpost()
+      .typeEpost(Epost)
       .typeMobile(phone)
       .typeUserName(userName)
       .typePassword(password)

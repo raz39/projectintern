@@ -9,8 +9,8 @@ class Signup {
     return this;
   }
 
-  typeEpost() {
-    cy.get("#E_post").clear().type("123");
+  typeEpost(Epost) {
+    cy.get("#E_post").clear().type(Epost);
     return this;
   }
 
