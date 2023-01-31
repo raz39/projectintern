@@ -6,7 +6,17 @@
 // For more comprehensive examples of custom
 // commands please read more here:
 // https://on.cypress.io/custom-commands
-// **********************************************
+// ***********************************************
+Cypress.Commands.add("login", () => {
+  const user = Cypress.env("userName");
+  const password = Cypress.env("password");
+
+  cy.get("#Username").clear().type(user);
+  cy.get("#Password").clear().type(password);
+  cy.get("input[name='login']").click();
+  cy.get("h3").should("have.text", "Welcome " + user);
+  cy.url().should("include", "azurewebsites.net/Dashboard");
+});
 
 //})
 // -- This is a parent command --
