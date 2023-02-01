@@ -10,23 +10,23 @@ describe("Test for login page", () => {
   });
 
   it("should validate empty login error message", () => {
-    login.clickSubmit().errorMessage();
+    login.clickSubmitBtn().verifyInvalidCredentials();
   });
 
   context("login form fill dependent test", () => {
     const username = faker.internet.userName();
-    const password = faker.name.fullName();
+    const password = faker.internet.password() ;
 
     beforeEach(() => {
       login.typeUserName(username).typePassword(password);
     });
 
     it("should validate Clear button is functional", () => {
-      login.clickClear().emptyValidation();
+      login.clickClearBtn().emptyFields();
     });
 
     it("should validate invalid credentials login error message", () => {
-      login.clickSubmit();
+      login.clickSubmitBtn().verifyInvalidCredentials();
     });
 
     it("should validate valid login sucess message", () => {

@@ -9,22 +9,22 @@ class Login {
     return this;
   }
 
-  clickSubmit() {
+  clickSubmitBtn() {
     cy.get("input[name='login']").click();
     return this;
   }
 
-  clickClear() {
+  clickClearBtn() {
     cy.get("input[name='clear']").click();
     return this;
   }
 
-  errorMessage() {
+  verifyInvalidCredentials() {
     cy.get(".alert-danger").contains("Wrong username or password");
     return this;
   }
 
-  emptyValidation() {
+  emptyFields() {
     cy.get("#Username").should("be.empty");
     cy.get("#Password").should("be.empty");
     return this;
