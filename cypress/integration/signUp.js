@@ -2,14 +2,14 @@
 import Signup from "../../POM/signUpPage_PO";
 import { faker } from "@faker-js/faker";
 
-const signup = new Signup();
-
-before(function () {
-  cy.visit(Cypress.env("baseUrl"));
-  cy.get("a.nav-link").eq(4).click();
-});
-
 describe("Test for signup page", () => {
+  const signup = new Signup();
+
+  before(function () {
+    cy.visit(Cypress.env("baseUrl"));
+    cy.get("a.nav-link").eq(4).click();
+  });
+
   it("should validate empty signup error message", () => {
     const selector = [
       "#FirstName-error",
@@ -31,51 +31,51 @@ describe("Test for signup page", () => {
     });
   });
 
-  it("should validate password and confirm password are same or not error message", () => {
+  it("should validate not matching password and confirm password error message", () => {
     const password = faker.internet.password();
 
-    signup.typeconfirmPassword(password).clickOnSignUpButton();
+    signup.typeConfirmPassword(password).clickOnSignUpButton();
     cy.get("#ConfirmPassword-error").should(
       "have.text",
       "'Confirm password' and 'Password' do not match."
     );
   });
-});
 
-context("Signup formfill dependent test", () => {
-  const name = faker.name.firstName();
-  const surName = faker.name.lastName();
-  const password = faker.internet.password();
-  const phone = faker.phone.number("984######");
-  const userName = faker.internet.userName();
-  const Epost = faker.internet.email();
+  context("Signup form fill dependent test", () => {
+    const name = faker.name.firstName();
+    const surName = faker.name.lastName();
+    const password = faker.internet.password();
+    const phone = faker.phone.number("984######");
+    const userName = faker.internet.userName();
+    const ePost = faker.internet.email();
 
-  beforeEach(() => {
-    signup
-      .typeFirstName(name)
-      .typeSurName(surName)
-      .typeEpost(Epost)
-      .typeMobile(phone)
-      .typeUserName(userName)
-      .typePassword(password)
-      .typeconfirmPassword(password)
-      .clickOnSignUpButton();
-  });
+    beforeEach(() => {
+      signup
+        .typeFirstName(name)
+        .typeSurName(surName)
+        .typeEpost(ePost)
+        .typeMobile(phone)
+        .typeUserName(userName)
+        .typePassword(password)
+        .typeConfirmPassword(password)
+        .clickOnSignUpButton();
+    });
 
-  it("should validate sufficient data signup sucessfull message", () => {
-    signup.verifySuccessMessage();
-  });
+    it("should validate sufficient data signup sucessfull message", () => {
+      signup.verifySuccessMessage();
+    });
 
-  it("should validate already exist username signup error message", () => {
-    signup
-      .typeFirstName(name)
-      .typeSurName(surName)
-      .typeEpost(Epost)
-      .typeMobile(phone)
-      .typeUserName(userName)
-      .typePassword(password)
-      .typeconfirmPassword(password)
-      .clickOnSignUpButton();
-    cy.get(".label-danger").should("have.text", "Username already exist");
+    it("should validate already exist username signup error message", () => {
+      signup
+        .typeFirstName(name)
+        .typeSurName(surName)
+        .typeEpost(ePost)
+        .typeMobile(phone)
+        .typeUserName(userName)
+        .typePassword(password)
+        .typeConfirmPassword(password)
+        .clickOnSignUpButton();
+      cy.get(".label-danger").should("have.text", "Username already exist");
+    });
   });
 });

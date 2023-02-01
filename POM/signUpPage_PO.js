@@ -1,6 +1,6 @@
 class Signup {
-  typeFirstName(name) {
-    cy.get("#FirstName").clear().type(name);
+  typeFirstName(firstName) {
+    cy.get("#FirstName").clear().type(firstName);
     return this;
   }
 
@@ -9,8 +9,8 @@ class Signup {
     return this;
   }
 
-  typeEpost(Epost) {
-    cy.get("#E_post").clear().type(Epost);
+  typeEpost(ePost) {
+    cy.get("#E_post").clear().type(ePost);
     return this;
   }
 
@@ -29,7 +29,7 @@ class Signup {
     return this;
   }
 
-  typeconfirmPassword(password) {
+  typeConfirmPassword(password) {
     cy.get("#ConfirmPassword").clear().type(password);
     return this;
   }
