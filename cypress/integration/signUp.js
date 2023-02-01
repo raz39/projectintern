@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import Signup from "../../POM/signUpPage";
+import Signup from "../../POM/signUpPage_PO";
 import { faker } from "@faker-js/faker";
 
 const signup = new Signup();
@@ -67,6 +67,15 @@ context("Signup formfill dependent test", () => {
   });
 
   it("should validate already exist username signup error message", () => {
+    signup
+      .typeFirstName(name)
+      .typeSurName(surName)
+      .typeEpost(Epost)
+      .typeMobile(phone)
+      .typeUserName(userName)
+      .typePassword(password)
+      .typeconfirmPassword(password)
+      .clickOnSignUpButton();
     cy.get(".label-danger").should("have.text", "Username already exist");
   });
 });
