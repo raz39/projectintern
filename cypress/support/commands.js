@@ -18,6 +18,10 @@ Cypress.Commands.add("login", () => {
   cy.url().should("include", "azurewebsites.net/Dashboard");
 });
 
+Cypress.Commands.add("visitLoginPage", () => {
+  cy.visit(Cypress.env("baseUrl"));
+});
+
 //})
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })

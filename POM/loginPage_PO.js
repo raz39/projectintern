@@ -1,44 +1,33 @@
 class Login {
-    typeUserName(username) 
-    {
-      cy.get("#Username").clear().type(username);
-      return this;
-    }
-  
-    typePassword(password) {
-      cy.get("#Password").clear().type(password);
-      return this;
-    }
-  
-    clickSubmit() {
-      cy.get("input[name='login']").click();
-      return this;
-    }
-    
-    clickClear() {
-      cy.get("input[name='clear']").click();
-      return this;
-    }
-  
-    verifyHeading() {
-      cy.get("h3").should("have.text", "Welcome elisa");
-      return this;
-    }
-  
-    errorMessage() {
-      cy.get(".alert-danger").contains("Wrong username or password");
-      return this;
-    }
-    
-    emptyValidation(){
-      cy.get("#Username").should(('be.empty'))
-     cy.get("#Password").should(('be.empty'))
+  typeUserName(username) {
+    cy.get("#Username").clear().type(username);
     return this;
-    }
-  
-    verifyHomePageUrl() {
-      cy.url().should("include", "azurewebsites.net/Dashboard");
-      return this;
-    }
   }
-  export default Login;
+
+  typePassword(password) {
+    cy.get("#Password").clear().type(password);
+    return this;
+  }
+
+  clickSubmit() {
+    cy.get("input[name='login']").click();
+    return this;
+  }
+
+  clickClear() {
+    cy.get("input[name='clear']").click();
+    return this;
+  }
+
+  errorMessage() {
+    cy.get(".alert-danger").contains("Wrong username or password");
+    return this;
+  }
+
+  emptyValidation() {
+    cy.get("#Username").should("be.empty");
+    cy.get("#Password").should("be.empty");
+    return this;
+  }
+}
+export default Login;

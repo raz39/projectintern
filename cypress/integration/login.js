@@ -5,7 +5,7 @@ describe("Test for login page", () => {
   const login = new Login();
 
   before(function () {
-    cy.visit(Cypress.env("baseUrl"));
+    cy.visitLoginPage();
     cy.get("a.nav-link").last().click();
   });
 
