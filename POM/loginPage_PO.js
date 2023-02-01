@@ -1,7 +1,7 @@
 class Login {
-    typeUserName(users) 
+    typeUserName(username) 
     {
-      cy.get("#Username").clear().type(users);
+      cy.get("#Username").clear().type(username);
       return this;
     }
   

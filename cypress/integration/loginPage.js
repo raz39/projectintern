@@ -1,8 +1,5 @@
-import Login from "../../POM/loginPage";
+import Login from "../../POM/loginPage_PO";
 import { faker } from "@faker-js/faker";
-
-const users = faker.internet.userName();
-const password = faker.name.fullName();
 
 const login = new Login();
 
@@ -18,8 +15,11 @@ describe("login for itera TRL-3", () => {
 });
 
 context("login fillUp for login page of ITERA", () => {
+  const username = faker.internet.userName();
+  const password = faker.name.fullName();
+
   beforeEach(() => {
-    login.typeUserName(users).typePassword(password);
+    login.typeUserName(username).typePassword(password);
   });
 
   it("should validate Clear button is functional", () => {

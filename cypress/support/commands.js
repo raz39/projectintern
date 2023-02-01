@@ -8,13 +8,13 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 Cypress.Commands.add("login", () => {
-  const user = Cypress.env("userName");
+  const username = Cypress.env("username");
   const password = Cypress.env("password");
 
-  cy.get("#Username").clear().type(user);
+  cy.get("#Username").clear().type(username);
   cy.get("#Password").clear().type(password);
   cy.get("input[name='login']").click();
-  cy.get("h3").should("have.text", "Welcome " + user);
+  cy.get("h3").should("have.text", "Welcome " + username);
   cy.url().should("include", "azurewebsites.net/Dashboard");
 });
 
