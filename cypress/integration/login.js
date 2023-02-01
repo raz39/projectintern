@@ -12,6 +12,7 @@ describe("Test for login page", () => {
   it("should validate empty login error message", () => {
     login.clickSubmit().errorMessage();
   });
+
   context("login form fill dependent test", () => {
     const username = faker.internet.userName();
     const password = faker.name.fullName();

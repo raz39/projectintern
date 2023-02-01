@@ -1,17 +1,6 @@
 class Signup {
-
-  abc(selector,name){
-
-
-    cy.get(selector).clear().type(name);
-    return this;
-  }
-
-
   typeFirstName(firstName) {
-    // cy.get("#FirstName").clear().type(firstName);
-    this.abc("#FirstName",name)
-    
+    cy.get("#FirstName").clear().type(firstName);
     return this;
   }
 
