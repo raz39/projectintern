@@ -33,6 +33,14 @@ describe("Test for adding new customer ", () => {
         .typeCity(city)
         .typePhone(phone)
         .typeEmail(email);
+
+      createNewUser
+        .typeName(name)
+        .typeCompany(company)
+        .typeAddress(address)
+        .typeCity(city)
+        .typePhone(phone)
+        .typeEmail(email);
     });
 
     it("should validate 'BACK TO LIST' button is working and verify data is exist in list", () => {
@@ -124,6 +132,21 @@ describe("Test for adding new customer ", () => {
       cy.get("#searching").clear().type(email);
       cy.get(".container > div > form > .btn").click();
       cy.get("tr>td:nth-child(6)").should("include.text", email);
+    });
+
+    it("should validate delete new user", () => {
+      cy.get(".btn-primary").click();
+
+      createNewUser.dataVerify("contain.text", formElement);
+
+      cy.get(".table")
+        .contains("td", name)
+        .get(".btn-outline-danger")
+        .last()
+        .click();
+      cy.get("input[value='Delete']").click();
+
+      createNewUser.dataVerify("not.to.contain.text", formElement);
     });
   });
 });
