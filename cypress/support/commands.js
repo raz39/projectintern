@@ -12,6 +12,7 @@
 Cypress.Commands.add("visitMainPage", () => {
   cy.visit(Cypress.env("baseUrl"));
   cy.get("a.nav-link").last().click();
+  cy.get("a.nav-link").last().click();
 });
 
 Cypress.Commands.add("login", () => {
@@ -27,4 +28,13 @@ Cypress.Commands.add("login", () => {
 
 Cypress.Commands.add("preserveCookies", () => {
   Cypress.Cookies.preserveOnce("ASP.NET_SessionId");
+  cy.url().should("include", "azurewebsites.net/Dashboard");
+});
+
+Cypress.Commands.add("preserveCookies", () => {
+  Cypress.Cookies.preserveOnce("ASP.NET_SessionId");
+});
+
+Cypress.Commands.add("visitLoginPage", () => {
+  cy.visit(Cypress.env("baseUrl"));
 });
