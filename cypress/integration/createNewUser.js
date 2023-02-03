@@ -3,7 +3,8 @@ import { faker } from "@faker-js/faker";
 
 describe("Test for adding new customer ", () => {
   before(function () {
-    cy.visitLoginPage();
+    cy.visitMainPage();
+    cy.get("a.nav-link").last().click();
     cy.login();
   });
 
@@ -11,15 +12,15 @@ describe("Test for adding new customer ", () => {
     cy.preserveCookies();
   });
 
-  const name = faker.name.fullName();
-  const company = faker.company.bs();
-  const address = faker.address.streetAddress();
-  const phone = faker.phone.number();
-  const email = faker.internet.email();
-  const city = faker.address.city();
-  const formElements = [name, company, address, city, phone, email];
-
   context("form fill for create new user of ITERA", () => {
+    const name = faker.name.fullName();
+    const company = faker.company.bs();
+    const address = faker.address.streetAddress();
+    const phone = faker.phone.number();
+    const email = faker.internet.email();
+    const city = faker.address.city();
+    const formElements = [name, company, address, city, phone, email];
+
     beforeEach(() => {
       cy.get(".btn-primary").click();
       cy.get("#Name").type(name);

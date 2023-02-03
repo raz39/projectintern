@@ -11,9 +11,8 @@ Cypress.Commands.add("preserveCookies", () => {
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-Cypress.Commands.add("visitLoginPage", () => {
+Cypress.Commands.add("visitMainPage", () => {
   cy.visit(Cypress.env("baseUrl"));
-  cy.get("a.nav-link").last().click();
 });
 
 Cypress.Commands.add("login", () => {
