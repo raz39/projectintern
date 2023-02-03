@@ -53,10 +53,14 @@ describe("Test for login page", () => {
       login.typeUserName(userName).typePassword(password).clickSubmitBtn();
       cy.get("h3").should("have.text", "Welcome " + userName);
       cy.url().should("include", "azurewebsites.net/Dashboard");
+      cy.get("a.nav-link").last().click();
+    });
+  
 
-      it("should validate valid login sucess message", () => {
+      it.only("should validate valid login sucess message", () => {
+
         cy.login();
       });
     });
-  });
-});
+  })
+
