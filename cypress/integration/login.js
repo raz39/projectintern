@@ -5,7 +5,7 @@ describe("Test for login page", () => {
   const login = new Login();
 
   before(function () {
-    cy.visitLoginPage();
+    cy.visitMainPage();
     cy.get("a.nav-link").last().click();
   });
 
@@ -15,7 +15,7 @@ describe("Test for login page", () => {
 
   context("login form fill dependent test", () => {
     const username = faker.internet.userName();
-    const password = faker.internet.password() ;
+    const password = faker.internet.password();
 
     beforeEach(() => {
       login.typeUserName(username).typePassword(password);
