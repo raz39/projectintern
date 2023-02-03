@@ -8,7 +8,6 @@ describe("Test for login page", () => {
 
   before(function () {
     cy.visitMainPage();
-    cy.get("a.nav-link").last().click();
   });
 
   it("should validate empty login error message", () => {
@@ -38,6 +37,7 @@ describe("Test for login page", () => {
       const phone = faker.phone.number("984######");
       const userName = faker.internet.userName();
       const ePost = faker.internet.email();
+
       cy.get(".btn.btn-link").click();
       signup
         .typeFirstName(name)
@@ -50,17 +50,15 @@ describe("Test for login page", () => {
         .clickOnSignUpButton()
         .verifySuccessMessage();
       cy.get("a.nav-link").last().click();
+
       login.typeUserName(userName).typePassword(password).clickSubmitBtn();
       cy.get("h3").should("have.text", "Welcome " + userName);
       cy.url().should("include", "azurewebsites.net/Dashboard");
       cy.get("a.nav-link").last().click();
     });
-  
 
-      it.only("should validate valid login sucess message", () => {
-
-        cy.login();
-      });
+    it("should validate valid login sucess message", () => {
+      cy.login();
     });
-  })
-
+  });
+});
