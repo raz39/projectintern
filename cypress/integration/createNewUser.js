@@ -103,7 +103,7 @@ describe("Test for adding new customer ", () => {
         .last()
         .click();
 
-      cy.get(selector).each((selector, index) => {
+      selector.forEach((selector, index) => {
         cy.get(selector).should("include.text", formElement[index]);
       });
 
