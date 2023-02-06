@@ -28,7 +28,8 @@ class Createnewuser {
     cy.get("#Email").clear().type(email);
     return this;
   }
-  dataVerify(validation,formElement) {
+
+  dataVerify(validation, formElement) {
     cy.get("tr:last-child>td:not(:last-child)").each((selector, index) => {
       cy.get(selector).should(validation, formElement[index]);
     });
