@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 import { faker } from "@faker-js/faker";
-import Createnewuser from "../../POM/createNewUser_PO";
+import CreateNewUser from "../../POM/createNewUser_PO";
 
 describe("Test for adding new customer ", () => {
-  const createNewUser = new Createnewuser();
+  const createNewUser = new CreateNewUser();
 
   before(function () {
     cy.visitMainPage();
@@ -14,7 +14,7 @@ describe("Test for adding new customer ", () => {
     cy.preserveCookies();
   });
 
-  context("form fill for create new user of ITERA", () => {
+  context("form fill for create new user dependent test", () => {
     const name = faker.name.fullName();
     const company = faker.company.bs();
     const address = faker.address.streetAddress();
@@ -37,15 +37,17 @@ describe("Test for adding new customer ", () => {
 
     it("should validate 'BACK TO LIST' button is working and verify data is exist in list", () => {
       cy.get(".btn-link").click();
+
       createNewUser.dataVerify("not.to.contain.text", formElement);
     });
 
     it("should add new user and verify added data is exist in list", () => {
       cy.get(".btn-primary").click();
+
       createNewUser.dataVerify("contain.text", formElement);
     });
 
-    it("should add new user and verify added edit data is exist in list", () => {
+    it("should add new user and verify edited data in list", () => {
       const editName = faker.name.fullName();
       const editCompany = faker.company.bs();
       const editAddress = faker.address.buildingNumber();
@@ -60,12 +62,14 @@ describe("Test for adding new customer ", () => {
         editPhone,
         editEmail,
       ];
+
       cy.get(".btn-primary").click();
       cy.get(".table")
         .contains("td", name)
         .get(".btn-outline-primary")
         .last()
         .click();
+
       createNewUser
         .typeName(editName)
         .typeCompany(editCompany)
@@ -73,7 +77,9 @@ describe("Test for adding new customer ", () => {
         .typeCity(editCity)
         .typePhone(editPhone)
         .typeEmail(editEmail);
+
       cy.get(".btn-primary").click();
+
       createNewUser.dataVerify("include.text", editFormElement);
     });
   });
