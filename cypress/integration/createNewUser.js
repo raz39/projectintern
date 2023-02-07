@@ -112,14 +112,14 @@ describe("Test for adding new customer ", () => {
       createNewUser.dataVerify("contain.text", formElement);
     });
 
-    it("should validate  search user by name", () => {
+    it("should validate search user by name", () => {
       cy.get(".btn-primary").click();
       cy.get("#searching").clear().type(name);
       cy.get(".container > div > form > .btn").click();
       cy.get("tr>td:nth-child(1)").should("include.text", name);
     });
 
-    it("should validate  search user by email", () => {
+    it("should validate search user by email", () => {
       cy.get(".btn-primary").click();
       cy.get("#searching").clear().type(email);
       cy.get(".container > div > form > .btn").click();
