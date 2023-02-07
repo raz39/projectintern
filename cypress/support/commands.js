@@ -34,7 +34,3 @@ Cypress.Commands.add("preserveCookies", () => {
 Cypress.Commands.add("preserveCookies", () => {
   Cypress.Cookies.preserveOnce("ASP.NET_SessionId");
 });
-
-Cypress.Commands.add("visitLoginPage", () => {
-  cy.visit(Cypress.env("baseUrl"));
-});
