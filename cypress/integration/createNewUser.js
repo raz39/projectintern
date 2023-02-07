@@ -22,7 +22,6 @@ describe("Test for adding new customer ", () => {
     const email = faker.internet.email();
     const city = faker.address.city();
     const formElement = [name, company, address, city, phone, email];
-    const formElement = [name, company, address, city, phone, email];
 
     beforeEach(() => {
       cy.get(".btn-primary").click();
