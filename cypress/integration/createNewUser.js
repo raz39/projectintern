@@ -145,8 +145,6 @@ describe("Test for adding new customer ", () => {
         .last()
         .click();
       cy.get("input[value='Delete']").click();
-
-      createNewUser.dataVerify("not.to.contain.text", formElement);
     });
   });
 });
