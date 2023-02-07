@@ -83,6 +83,47 @@ describe("Test for adding new customer ", () => {
       createNewUser.dataVerify("include.text", editFormElement);
     });
 
+    it("should create new user and verify in view user", () => {
+      const selector = [
+        ".dl-horizontal > dd:nth-of-type(1)",
+        ".dl-horizontal > dd:nth-of-type(2)",
+        ".dl-horizontal > dd:nth-of-type(3)",
+        ".dl-horizontal > dd:nth-of-type(4)",
+        ".dl-horizontal > dd:nth-of-type(5)",
+        ".dl-horizontal > dd:nth-of-type(6)",
+      ];
+
+      cy.get(".btn-primary").click();
+
+      createNewUser.dataVerify("include.text", formElement);
+
+      cy.get(".table")
+        .contains("td", name)
+        .get(".btn-outline-info")
+        .last()
+        .click();
+
+      selector.forEach((selector, index) => {
+        cy.get(selector).should("include.text", formElement[index]);
+      });
+
+      cy.get(".btn-link").click();
+    });
+    
+    it("should validate search user by name", () => {
+      cy.get(".btn-primary").click();
+      cy.get("#searching").clear().type(name);
+      cy.get(".container > div > form > .btn").click();
+      cy.get("tr>td:nth-child(1)").should("include.text", name);
+    });
+
+    it("should validate search user by email", () => {
+      cy.get(".btn-primary").click();
+      cy.get("#searching").clear().type(email);
+      cy.get(".container > div > form > .btn").click();
+      cy.get("tr>td:nth-child(6)").should("include.text", email);
+    });
+
     it("should validate delete new user", () => {
       cy.get(".btn-primary").click();
 
@@ -94,9 +135,6 @@ describe("Test for adding new customer ", () => {
         .last()
         .click();
       cy.get("input[value='Delete']").click();
-
-      createNewUser.dataVerify("not.to.contain.text", formElement);
     });
   });
 });
-

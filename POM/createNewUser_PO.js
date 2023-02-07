@@ -1,4 +1,4 @@
-class Createnewuser {
+class CreateNewUser {
   typeName(name) {
     cy.get("#Name").clear().type(name);
     return this;
@@ -35,4 +35,4 @@ class Createnewuser {
     });
   }
 }
-export default Createnewuser;
+export default CreateNewUser;
