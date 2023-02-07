@@ -109,6 +109,7 @@ describe("Test for adding new customer ", () => {
 
       cy.get(".btn-link").click();
     });
+    
     it("should validate search user by name", () => {
       cy.get(".btn-primary").click();
       cy.get("#searching").clear().type(name);
